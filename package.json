@@ -1,0 +1,19 @@
+{
+  "name": "ms_shop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": "true",
+  "scripts": {
+    "dev": "yarn start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "workspaces": {
+    "packages": [
+      "apps/*"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

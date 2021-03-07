@@ -1,0 +1,17 @@
+node_modules
+.tmp
+.idea
+.idea/
+.DS_Store
+.version
+dist
+.history
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# dotenv environment variables file
+.env
+.env.dev
+
+yarn.lock
