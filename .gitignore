@@ -6,6 +6,7 @@ node_modules
 .version
 dist
 .history
+api/postgres
 
 # Coverage directory used by tools like istanbul
 coverage
