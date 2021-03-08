@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DBNAME: shop
+      POSTGRES_PASSWORD: ms_shop
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    container_name:
+      'ms_shop_postgres'
