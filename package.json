@@ -5,13 +5,22 @@
   "private": "true",
   "scripts": {
     "dev": "lerna run dev --parallel",
+    "eslint": "yarn lerna run eslint --stream",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "workspaces": {
+    "packages": [
+      "apps/*"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "eslint": "^7.21.0",
     "lerna": "^4.0.0"
   }
 }
