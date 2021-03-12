@@ -7,6 +7,10 @@
     "eslint": "eslint ./src --ext .js,.jsx,.ts,.tsx"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.18.0"
+    "@prisma/cli": "^2.18.0",
+    "prisma": "2.18.0"
+  },
+  "dependencies": {
+    "@prisma/client": "2.18.0"
   }
 }
