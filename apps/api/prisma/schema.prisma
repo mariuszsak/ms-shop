@@ -14,7 +14,7 @@ model User {
   Order Order[]
 }
 
-model Category {
+model Brand {
   id      Int       @id @default(autoincrement())
   name    String
   Product Product[]
@@ -23,10 +23,12 @@ model Category {
 model Product {
   id          Int          @id @default(autoincrement())
   name        String
+  type Type
+  gender Gender
   description String
   price       BigInt
-  categoryId  Int
-  category    Category     @relation(fields: [categoryId], references: [id])
+  brandId  Int
+  brand    Brand     @relation(fields: [brandId], references: [id])
   OrderItems  OrderItems[]
 }
 
@@ -47,4 +49,15 @@ model OrderItems {
   product   Product @relation(fields: [productId], references: [id])
 
   @@id([orderId, productId])
+}
+
+enum Gender {
+    MALE
+    FEMALE
+    UNISEX
+}
+
+enum Type {
+    EYEGLASSES
+    SUNGLASSES
 }
