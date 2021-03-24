@@ -5,7 +5,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_DBNAME: shop
+      POSTGRES_DBNAME: glassshop
       POSTGRES_PASSWORD: ms_shop
     volumes:
       - ./postgres:/var/lib/postgresql/data
