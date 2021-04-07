@@ -2,6 +2,7 @@
   "restartable": "rs",
   "ignore": [".git", "node_modules/", "dist/", "coverage/"],
   "watch": ["src/"],
+  "delay": "1500",
   "execMap": {
     "ts": "node -r ts-node/register"
   },
