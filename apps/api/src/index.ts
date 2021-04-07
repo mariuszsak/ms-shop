@@ -12,7 +12,6 @@ app.use('/img', express.static(dir))
 
 app.get('/products', async (req: express.Request, res) => {
     try {
-        console.log(path.join(__dirname, '..', 'img'))
         const products = await prisma.product.findMany({
             include: {
                 brand: true
@@ -21,6 +20,16 @@ app.get('/products', async (req: express.Request, res) => {
         res.status(200)
             .send(
                 JSON.stringify(products, (_: string, v: any) => typeof v === 'bigint' ? v.toString() : v));
+    } catch (e) {
+        console.log(e)
+    }
+});
+
+app.get('/types', async (req: express.Request, res) => {
+    try {
+        const types = await prisma.$queryRaw`SELECT enum_range(NULL::"Type") AS glassType`;
+        res.status(200)
+            .send(types);
     } catch (e) {
         console.log(e)
     }
