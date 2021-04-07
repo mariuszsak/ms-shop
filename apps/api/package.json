@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node ./src/index.ts",
+    "dev": "nodemon --config nodemon.json ./src/index.ts",
     "eslint": "eslint ./src --ext .js,.jsx,.ts,.tsx"
   },
   "devDependencies": {
