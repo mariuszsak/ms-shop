@@ -23,12 +23,14 @@ model Brand {
 model Product {
   id          Int          @id @default(autoincrement())
   name        String
-  type Type
-  gender Gender
+  typeId      Int          @default(1)
+  type        GlassType    @relation(fields: [typeId], references: [id])
+  genderId    Int          @default(1)
+  gender      Gender       @relation(fields: [genderId], references: [id])
   description String
   price       BigInt
-  brandId  Int
-  brand    Brand     @relation(fields: [brandId], references: [id])
+  brandId     Int
+  brand       Brand        @relation(fields: [brandId], references: [id])
   OrderItems  OrderItems[]
 }
 
@@ -51,13 +53,14 @@ model OrderItems {
   @@id([orderId, productId])
 }
 
-enum Gender {
-    MALE
-    FEMALE
-    UNISEX
+model Gender {
+  id          Int       @id @default(autoincrement())
+  gender_name String
+  Product     Product[]
 }
 
-enum Type {
-    EYEGLASSES
-    SUNGLASSES
+model GlassType {
+  id        Int       @id @default(autoincrement())
+  type_name String
+  Product   Product[]
 }
