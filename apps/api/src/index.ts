@@ -25,9 +25,28 @@ app.get('/products', async (req: express.Request, res) => {
     }
 });
 
+app.get(`/custom/:glasstype/:gender`, async (req: express.Request, res) => {
+    const { glasstype, gender } = req.params;
+
+    try {
+        const products = await prisma.product.findMany({
+            where: {
+                type: glasstype,
+                gender: gender
+            }
+        });
+        res.status(200)
+            .send(
+                JSON.stringify(products, (_: string, v: any) => typeof v === 'bigint' ? v.toString() : v));
+    } catch (e) {
+        console.log(e)
+    }
+});
+
 app.get('/types', async (req: express.Request, res) => {
     try {
         const types = await prisma.$queryRaw`SELECT enum_range(NULL::"Type") AS glassType`;
+        console.log(types)
         res.status(200)
             .send(types);
     } catch (e) {
