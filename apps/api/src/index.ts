@@ -13,8 +13,26 @@ app.use('/img', express.static(dir))
 app.get('/products', async (req: express.Request, res) => {
     try {
         const products = await prisma.product.findMany({
-            include: {
-                brand: true
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                price: true,
+                brand: {
+                    select: {
+                        name: true
+                    }
+                },
+                gender: {
+                    select: {
+                        gender_name: true
+                    }
+                },
+                type: {
+                    select: {
+                        type_name: true
+                    }
+                }
             }
         });
         res.status(200)
@@ -26,7 +44,7 @@ app.get('/products', async (req: express.Request, res) => {
 });
 
 app.get(`/custom/:glasstype/:gender`, async (req: express.Request, res) => {
-    const { glasstype, gender } = req.params;
+    const {glasstype, gender} = req.params;
 
     try {
         const products = await prisma.product.findMany({
