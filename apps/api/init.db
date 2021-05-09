@@ -2,7 +2,7 @@ INSERT INTO "User" (id, name, email)
 VALUES (1, 'user1', 'user1@mail.com'),
        (2, 'user2', 'user2@mail.com');
 
-INSERT INTO "Brand" (id, name)
+INSERT INTO "Brand" (id, brand_name)
 VALUES (1, 'Polaroid'),
        (2, 'Hugo Boss'),
        (3, 'Tom Ford'),

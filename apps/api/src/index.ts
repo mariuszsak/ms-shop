@@ -20,7 +20,7 @@ app.get('/products', async (req: express.Request, res) => {
                 price: true,
                 brand: {
                     select: {
-                        name: true
+                        brand_name: true
                     }
                 },
                 gender: {

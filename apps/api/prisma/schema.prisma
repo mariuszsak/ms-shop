@@ -15,9 +15,9 @@ model User {
 }
 
 model Brand {
-  id      Int       @id @default(autoincrement())
-  name    String
-  Product Product[]
+  id         Int       @id @default(autoincrement())
+  brand_name String
+  Product    Product[]
 }
 
 model Product {
