@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "bundle": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --colors --coverage",
     "dev": "webpack serve --mode development --open --hot",
     "build": "webpack --mode production",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -24,18 +24,81 @@
     "@babel/preset-env": "^7.13.9",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.13.0",
+    "@types/enzyme": "^3.10.8",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/jest": "^26.0.23",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
+    "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.1.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2",
     "eslint": "^7.21.0",
     "html-webpack-plugin": "^5.3.0",
+    "jest": "^26.6.3",
+    "jest-environment-enzyme": "^7.1.2",
+    "jest-enzyme": "^7.1.2",
     "style-loader": "^2.0.0",
+    "ts-jest": "^26.5.6",
     "typescript": "^4.2.3",
     "webpack": "^5.24.3",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"
+  },
+  "jest": {
+    "clearMocks": true,
+    "collectCoverageFrom": [
+      "**/*.tsx"
+    ],
+    "coverageDirectory": "coverage",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "node",
+      "ts",
+      "tsx"
+    ],
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "\\\\node_modules\\\\",
+      "<rootDir>/test/dataProviders/.*\\.ts"
+    ],
+    "coverageReporters": [
+      "json",
+      "text",
+      "html"
+    ],
+    "setupFilesAfterEnv": [
+      "jest-enzyme"
+    ],
+    "testEnvironment": "enzyme",
+    "testEnvironmentOptions": {
+      "enzymeAdapter": "react17"
+    },
+    "testPathIgnorePatterns": [
+      "<rootDir>/test/dataProviders/.*\\.ts"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "<rootDir>/setupTests.js"
+    ],
+    "roots": [
+      "<rootDir>/tests/"
+    ],
+    "moduleDirectories": [
+      "<rootDir>",
+      "node_modules",
+      "src/js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+    }
   }
 }

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Initial test Should render an component correctly 1`] = `
+<div>
+  <h1>
+    test
+  </h1>
+</div>
+`;
+
+exports[`Initial test Should render correctly 1`] = `
+<div>
+  <SampleComponent />
+</div>
+`;

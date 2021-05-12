@@ -1,14 +1,12 @@
 import React from 'react';
-import '../styles/index.css';
+import SampleComponent from "./SampleComponent";
 
-class App extends React.Component<{}, {}> {
-    render(): JSX.Element {
-        return (
-            <div>
-                <h1>Welcome to MS Shop</h1>
-            </div>
-        );
-    }
+function App() {
+    return (
+        <div>
+            <SampleComponent/>
+        </div>
+    );
 }
 
 export default App;
