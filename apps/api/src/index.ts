@@ -4,14 +4,13 @@ import * as path from "path";
 
 const prisma = new PrismaClient();
 
-const app = express();
+export const app = express();
 const port = 3000;
 
 const dir = path.join(__dirname, '..', 'img')
 app.use('/img', express.static(dir))
 
 app.get('/products', async (req: express.Request, res) => {
-    try {
         const products = await prisma.product.findMany({
             select: {
                 id: true,
@@ -35,43 +34,79 @@ app.get('/products', async (req: express.Request, res) => {
                 }
             }
         });
-        res.status(200)
+        res
+            .status(200)
             .send(
                 JSON.stringify(products, (_: string, v: any) => typeof v === 'bigint' ? v.toString() : v));
-    } catch (e) {
-        console.log(e)
+
     }
-});
+);
 
-app.get(`/custom/:glasstype/:gender`, async (req: express.Request, res) => {
-    const {glasstype, gender} = req.params;
+app.get(`/custom/:type/:gender`, async (req: express.Request, res) => {
+        const {type, gender} = req.params;
 
-    try {
         const products = await prisma.product.findMany({
             where: {
-                type: glasstype,
-                gender: gender
+                OR: [
+                    {
+                        gender: {
+                            gender_name: {
+                                contains: gender
+                            }
+                        },
+                        type: {
+                            type_name: {
+                                contains: type
+                            }
+                        }
+                    }
+                ]
+            },
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                price: true,
+                brand: {
+                    select: {
+                        brand_name: true
+                    }
+                },
+                gender: {
+                    select: {
+                        gender_name: true
+                    }
+                },
+                type: {
+                    select: {
+                        type_name: true
+                    }
+                }
             }
         });
-        res.status(200)
+        res
+            .status(200)
             .send(
                 JSON.stringify(products, (_: string, v: any) => typeof v === 'bigint' ? v.toString() : v));
-    } catch (e) {
-        console.log(e)
     }
-});
+);
 
 app.get('/types', async (req: express.Request, res) => {
-    try {
-        const types = await prisma.$queryRaw`SELECT enum_range(NULL::"Type") AS glassType`;
-        console.log(types)
-        res.status(200)
+        const types = await prisma.glassType.findMany();
+        res
+            .status(200)
             .send(types);
-    } catch (e) {
-        console.log(e)
     }
+);
+
+app.get('/', (req: express.Request, res: express.Request) => {
+    res
+        .status(200)
+        .send('Hello world!');
 });
 
-app.listen(port, () => {
-    console.log('App is running.')
-})
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(port, () => {
+        console.log('App is running.');
+    });
+}
