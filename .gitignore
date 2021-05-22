@@ -16,3 +16,5 @@ coverage
 .env.dev
 
 yarn.lock
+lerna-debug.log
+
