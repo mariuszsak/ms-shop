@@ -1,16 +1,18 @@
 import {PrismaClient} from "@prisma/client";
 import express from 'express';
 import * as path from "path";
+import controller from "./dummyController";
 
-const prisma = new PrismaClient();
+export const prisma = new PrismaClient();
 
 export const app = express();
-const port = 3000;
 
-const dir = path.join(__dirname, '..', 'img')
-app.use('/img', express.static(dir))
+const dir = path.join(__dirname, '..', 'img');
+app.use('/img', express.static(dir));
+app.use('/', controller);
 
-app.get('/products', async (req: express.Request, res) => {
+app.get('/products', async (req: express.Request, res: express.Response) => {
+    console.log('x')
         const products = await prisma.product.findMany({
             select: {
                 id: true,
@@ -98,15 +100,3 @@ app.get('/types', async (req: express.Request, res) => {
             .send(types);
     }
 );
-
-app.get('/', (req: express.Request, res: express.Request) => {
-    res
-        .status(200)
-        .send('Hello world!');
-});
-
-if (process.env.NODE_ENV !== 'test') {
-    app.listen(port, () => {
-        console.log('App is running.');
-    });
-}

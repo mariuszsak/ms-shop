@@ -1,43 +1,24 @@
 import {app} from '../src'
-import request from 'supertest';
+import supertest from "supertest";
 
 describe("endpoint tests", () => {
 
-    let server, agent;
-
-    beforeEach(async (done) => {
-        server = app.listen(4000, (err) => {
-            if (err) return done(err);
-            agent = request.agent(server);
-            done();
-        });
-    })
-
-    afterEach((done) => server && server.close(done))
-
-    it("should return helloworld", async () => {
-        await agent
-            .get("/")
-            .expect(200)
-    })
-
-    it("should return products", async () => {
-        await agent
+    it("should return fake products", async () => {
+        await supertest(app)
             .get("/products")
             .expect(200)
     })
 
     it("should return types", async () => {
-        await agent
+        await supertest(app)
             .get("/types")
             .expect(200)
     })
 
     it("should return something", async () => {
-        await agent
+        await supertest(app)
             .get("/custom/Eyeglasses/Unisex")
             .expect(200)
     })
-
 })
 
