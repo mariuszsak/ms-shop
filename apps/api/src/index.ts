@@ -100,3 +100,19 @@ app.get('/types', async (req: express.Request, res) => {
             .send(types);
     }
 );
+
+app.get('/brands', async (req: express.Request, res) => {
+        const brands = await prisma.brand.findMany();
+        res
+            .status(200)
+            .send(brands);
+    }
+);
+
+app.get('/gender', async (req: express.Request, res) => {
+        const gender = await prisma.gender.findMany();
+        res
+            .status(200)
+            .send(gender);
+    }
+);
