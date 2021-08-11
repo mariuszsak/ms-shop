@@ -7,6 +7,7 @@ node_modules
 dist
 .history
 postgres
+src/config/serviceAccount.json
 
 # Coverage directory used by tools like istanbul
 coverage
