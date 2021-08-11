@@ -2,6 +2,7 @@ import {PrismaClient} from "@prisma/client";
 import express from 'express';
 import * as path from "path";
 import controller from "./dummyController";
+import userController from "./userController";
 
 export const prisma = new PrismaClient();
 
@@ -10,9 +11,9 @@ export const app = express();
 const dir = path.join(__dirname, '..', 'img');
 app.use('/img', express.static(dir));
 app.use('/', controller);
+app.use('/', userController);
 
 app.get('/products', async (req: express.Request, res: express.Response) => {
-    console.log('x')
         const products = await prisma.product.findMany({
             select: {
                 id: true,
